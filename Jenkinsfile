@@ -26,7 +26,13 @@ pipeline {
         stage('Docker Login') {
             steps{
                 sh 'docker login -u sandipxds -p d65219d7-c503-4714-9145-51b5278fff1e'
+                script {
+                    dockerImage.push("latest")
+                }
             }
+            
+            
+            
         }
 
         stage("Deploy App to Kubernetes"){
