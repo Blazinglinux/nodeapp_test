@@ -23,19 +23,27 @@ pipeline {
             }
         }
 
-        stage('Push Image to DockerHub'){
-            environment {
-                registryCredentials = "dockerhublogin"
-                }
-
+        stage('Docker Login') {
             steps{
-                script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials ) {
-                        dockerImage.push("latest")
-                    }
-                }
+                sh 'docker login -u sandipxds -p d65219d7-c503-4714-9145-51b5278fff1e'
             }
         }
+        
+        
+        
+ #       stage('Push Image to DockerHub'){
+ #           environment {
+ #               registryCredentials = "dockerhublogin"
+ #               }
+
+#            steps{
+#                script {
+#                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials ) {
+#                        dockerImage.push("latest")
+#                    }
+#                }
+#            }
+#        }
 
         stage("Deploy App to Kubernetes"){
             steps{
